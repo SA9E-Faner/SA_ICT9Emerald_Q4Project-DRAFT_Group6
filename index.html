@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="obmc_logo.png" type="image/x-icon" />
+  <title>My Online Portfolio</title>
+
+<style>
+/* General Body & Fonts */
+body {
+  font-family: 'Open Sans', sans-serif;
+  background: linear-gradient(135deg, #fff0f6, #ffe8f0);
+  color: #5a3e4d;
+  min-height: 100vh;
+  margin: 0;
+  padding-bottom: 60px; /* For footer */
+}
+
+/* Navbar */
+.navbar {
+  background: linear-gradient(to right, #f8bbd0, #f48fb1);
+  box-shadow: 0 4px 12px rgba(244, 143, 177, 0.5);
+  font-weight: 600;
+}
+.nav-link {
+  color: #5a3e4d !important;
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  padding: 0.4rem 1rem;
+}
+.nav-link:hover {
+  background-color: #fce4ec;
+  color: #d6336c !important;
+  font-weight: 700;
+}
+#logo {
+  width: 48px;
+  filter: drop-shadow(0 0 2px #d6336c);
+}
+
+/* Header */
+#head1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+  color: #b83280;
+  text-align: center;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 4px #f8bbd0;
+}
+.info {
+  background: #fff0f6;
+  border-radius: 25px;
+  padding: 100px 30px 50px;
+  max-width: 800px;
+  margin: 1.5rem auto 2rem;
+  box-shadow: 0 6px 20px rgba(244, 143, 177, 0.35);
+  color: #6a2a52;
+}
+.info p.lead {
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #7d4c69;
+}
+
+/* Profile Section */
+#prof-sec {
+  max-width: 900px;
+  margin: 3rem auto;
+  background: #fff0f6;
+  border-radius: 25px;
+  box-shadow: 0 5px 18px rgba(244, 143, 177, 0.4);
+  padding: 30px;
+  color: #73264d;
+}
+#profile {
+  width: 100%;
+  border-radius: 25px;
+  box-shadow: 0 8px 18px rgba(244, 143, 177, 0.35);
+  object-fit: cover;
+}
+table {
+  border-radius: 15px;
+  overflow: hidden;
+  background: #fff0f6;
+  box-shadow: 0 2px 10px rgba(244, 143, 177, 0.2);
+  color: #5c3953;
+}
+th {
+  background: #f8bbd0;
+  color: #541749;
+  font-size: 1.1rem;
+}
+td {
+  font-size: 1rem;
+  vertical-align: middle;
+}
+em {
+  color: #8a4c70;
+}
+
+/* Project Summary */
+.project-summary {
+  background: linear-gradient(to right, #f48fb1, #fce4ec);
+  color: #7a2c54;
+  padding: 25px 15px;
+  border-radius: 15px;
+  box-shadow: 0 6px 18px rgba(244, 143, 177, 0.4);
+  margin-bottom: 2rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  text-align: center;
+  font-size: 2rem;
+  letter-spacing: 0.05em;
+}
+
+/* Details styling */
+details {
+  background: #fff0f6;
+  border: 2px solid #f8bbd0;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 14px rgba(244, 143, 177, 0.25);
+  color: #73264d;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+details:hover {
+  background-color: #fce4ec;
+}
+summary {
+  font-weight: 700;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  color: #b83280;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Next Section */
+#next {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  color: #b83280;
+  text-align: center;
+}
+#next p {
+  font-size: 1.15rem;
+  color: #6a2a52;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+/* Feedback Section */
+#feedback {
+  max-width: 700px;
+  margin: 3rem auto;
+  background: #fff0f6;
+  border-radius: 25px;
+  box-shadow: 0 5px 20px rgba(244, 143, 177, 0.35);
+  padding: 30px;
+  color: #73264d;
+}
+#feedback h2 {
+  font-family: 'Playfair Display', serif;
+  color: #b83280;
+  margin-bottom: 25
+
+  /* === General Animations === */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade in on page load */
+.fade-in {
+  animation: fadeInUp 1s ease forwards;
+  opacity: 0;
+}
+
+/* Smooth hover transitions */
+.nav-link, button, details summary {
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+/* Logo pulse */
+#logo {
+  animation: pulseGlow 3s infinite alternate ease-in-out;
+}
+
+@keyframes pulseGlow {
+  0% {
+    filter: drop-shadow(0 0 2px #d6336c);
+  }
+  100% {
+    filter: drop-shadow(0 0 8px #d6336c);
+  }
+}
+
+/* Profile photo glow */
+#profile {
+  transition: box-shadow 0.4s ease;
+}
+#profile:hover {
+  box-shadow: 0 0 15px 5px #f48fb1;
+}
+
+/* Details open/close smooth animation */
+details[open] summary::after {
+  content: "▲";
+  float: right;
+  transition: transform 0.3s ease;
+}
+details summary::after {
+  content: "▼";
+  float: right;
+  transition: transform 0.3s ease;
+}
+details summary:hover {
+  color: #d6336c;
+}
+
+/* Chat messages fade in */
+#chat-box div {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+  margin-bottom: 8px;
+}
+
+/* Button hover */
+button[type="submit"] {
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+button[type="submit"]:hover {
+  background-color: #b82e5f;
+  transform: scale(1.05);
+}
+
+/* Smooth scroll behavior for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Chat Container */
+.chat-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+  max-width: 100%;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Chat Header */
+.chat-header {
+  background-color: #d6336c;
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+.chat-header button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.chat-header button:hover {
+  transform: rotate(90deg);
+}
+
+/* Chat Box */
+.chat-box {
+  padding: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Chat Form */
+.chat-form {
+  display: flex;
+  padding: 10px;
+  background-color: #f8bbd0;
+  border-top: 1px solid #d6336c;
+}
+
+.chat-form input {
+  flex-grow: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 20px;
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.chat-form button {
+  background-color: #d6336c;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: transform 0.3s ease;
+}
+
+.chat-form button:hover {
+  transform: scale(1.1);
+}
+
+/* Message Bubbles */
+.message {
+  padding: 10px;
+  border-radius: 20px;
+  max-width: 70%;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.user {
+  background-color: #d6336c;
+  color: #fff;
+  align-self: flex-end;
+}
+
+.bot {
+  background-color: #f8bbd0;
+  color: #73264d;
+  align-self: flex-start;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+</style>
+
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-md navbar-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img id="logo" src="obmc_logo.png" alt="Logo" />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="#prof-sec">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#q1">Q1</a></li>
+        <li class="nav-item"><a class="nav-link" href="#q2">Q2</a></li>
+        <li class="nav-item"><a class="nav-link" href="#q3">Q3</a></li>
+        <li class="nav-item"><a class="nav-link" href="#q4">Q4</a></li>
+        <li class="nav-item"><a class="nav-link" href="#next">Next</a></li>
+        <li class="nav-item"><a class="nav-link" href="#feedback">Rate Us</a></li>
+      </ul>
+      <form class="d-flex" role="search" onsubmit="return false;">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+        <button class="btn btn-light" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<!-- Intro Info -->
+<section class="info">
+  <h1 id="head1">My Online Portfolio</h1>
+  <p class="lead">
+    This portfolio showcases my quarterly projects for the school year 2024–2025 using HTML, CSS,
+    Bootstrap, and JavaScript. Use the navigation links to explore each project.
+  </p>
+</section>
+
+<!-- Profile Section -->
+<section class="container" id="prof-sec">
+  <div class="row align-items-center">
+    <div class="col-md-4">
+      <img id="profile" src="profile.png" alt="Profile Photo" />
+    </div>
+    <div class="col-md-8">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th colspan="2" class="text-center">Profile Information</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Name:</strong></td>
+            <td>Mr. Student 1</td>
+          </tr>
+          <tr>
+            <td><strong>Interests/Clubs:</strong></td>
+            <td>Tiktok, Mobile Games, Music</td>
+          </tr>
+          <tr>
+            <td><strong>Ambition:</strong></td>
+            <td><em>"I am dedicated to working hard in high school to earn a spot at MIT and contribute to groundbreaking advancements in science and engineering."</em></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Quarter Projects -->
+<section class="container">
+  <div class="project-summary">Quarter Projects</div>
+  <div id="q1">
+    <details>
+      <summary><strong>Quarter 1</strong></summary>
+      <p>
+        My first quarter project showcases HTML and CSS skills to create a simple webpage design.
+      </p>
+    </details>
+  </div>
+  <div id="q2">
+    <details>
+      <summary><strong>Quarter 2</strong></summary>
+      <p>
+        In quarter two, I added Bootstrap styling and responsive layouts.
+      </p>
+    </details>
+  </div>
+  <div id="q3">
+    <details>
+      <summary><strong>Quarter 3</strong></summary>
+      <p>
+        My third quarter project introduced JavaScript for interactive features.
+      </p>
+    </details>
+  </div>
+  <div id="q4">
+    <details>
+      <summary><strong>Quarter 4</strong></summary>
+      <p>
+        The final quarter project combined all skills into a fully functional portfolio website.
+      </p>
+    </details>
+  </div>
+</section>
+
+<!-- Next Section -->
+<section class="container" id="next">
+  <p class="fade-in">
+    Looking forward to next year's projects to further improve my coding skills!
+  </p>
+</section>
+
+<!-- Feedback Section -->
+<section id="feedback" class="container">
+  <h2>Rate Us</h2>
+  <form id="feedbackForm" onsubmit="return false;">
+    <div class="mb-3">
+      <label for="nameInput" class="form-label">Name:</label>
+      <input type="text" class="form-control" id="nameInput" placeholder="Your name" />
+    </div>
+    <div class="mb-3">
+      <label for="emailInput" class="form-label">Email address:</label>
+      <input type="email" class="form-control" id="emailInput" placeholder="name@example.com" />
+    </div>
+    <div class="mb-3">
+      <label for="ratingSelect" class="form-label">Rating:</label>
+      <select class="form-select" id="ratingSelect">
+        <option selected>Choose a rating</option>
+        <option value="5">Excellent</option>
+        <option value="4">Good</option>
+        <option value="3">Average</option>
+        <option value="2">Poor</option>
+        <option value="1">Terrible</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="commentsArea" class="form-label">Comments:</label>
+      <textarea class="form-control" id="commentsArea" rows="3" placeholder="Write your feedback here..."></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</section>
+
+<section id="chatbot" class="container my-5">
+  <h3 style="color:#a83f8b; font-family: 'Playfair Display', serif;">Portfolio Chat Bot</h3>
+  <div id="chat-window" style="background:#fff0f6; border:2px solid #f7d5ec; border-radius:20px; height:300px; overflow-y:auto; padding:15px; box-shadow:0 0 15px #eeb8db;">
+    <!-- Messages will appear here -->
+  </div>
+  <form id="chat-form" style="margin-top:15px;">
+    <input type="text" id="chat-input" placeholder="Ask me about my projects..." style="width:80%; padding:10px; border:2px solid #f7c8df; border-radius:15px;"/>
+    <button type="submit" style="width:18%; padding:10px; background:#d84ca5; color:#fff; border:none; border-radius:15px;">Send</button>
+  </form>
+</section>
+
+<script>
+  const chatWindow = document.getElementById('chat-window');
+  const chatForm = document.getElementById('chat-form');
+  const chatInput = document.getElementById('chat-input');
+
+  chatForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const userMessage = chatInput.value.trim();
+    if (!userMessage) return;
+
+    addMessage('You', userMessage);
+    chatInput.value = '';
+
+    // Simulate bot response delay
+    setTimeout(() => {
+      const botResponse = getBotResponse(userMessage);
+      addMessage('Bot', botResponse);
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+    }, 800);
+  });
+
+  function addMessage(sender, text) {
+    const msgDiv = document.createElement('div');
+    msgDiv.style.margin = '10px 0';
+    msgDiv.style.fontFamily = sender === 'Bot' ? "'Playfair Display', serif" : "'Open Sans', sans-serif";
+    msgDiv.style.color = sender === 'Bot' ? '#a83f8b' : '#6a3f66';
+    msgDiv.style.fontWeight = sender === 'Bot' ? '700' : '400';
+    msgDiv.textContent = `${sender}: ${text}`;
+    chatWindow.appendChild(msgDiv);
+  }
+
+  function getBotResponse(input) {
+    input = input.toLowerCase();
+
+    if (input.includes('projects')) {
+      return "I have 4 quarter projects: HTML/CSS basics, JavaScript essentials, advanced CSS with Bootstrap, and a JS portfolio project.";
+    } else if (input.includes('hi') || input.includes('hello')) {
+      return "Hi, Dear! Lovely to see you here!";
+    } else if (input.includes('profile') || input.includes('about')) {
+      return "I'm Jane Doe, a 3rd-year Computer Science student passionate about web development.";
+    } else if (input.includes('contact') || input.includes('email')) {
+      return "You can reach me at jane.doe@example.com.";
+    } else if (input.includes('project') || input.includes('output')) {
+      return "I'll get you in a while, sweetie!";
+    } else if (input.includes('reference') || input.includes('source')) {
+      return "if you are asking about the chatbot, we got the idea from this video: https://www.youtube.com/watch?v=B21G6tUI4L0";
+    } else {
+      return "Sorry, I didn't quite get that. Try asking about my projects, profile, or contact info.";
+    }
+  }
+</script>
+
+<footer class="footer text-center mt-5" style="background: linear-gradient(to right, #ffc0cb, #ffe4e1); padding: 30px 10px; font-family: 'Playfair Display', serif; color: #6a3f66;">
+  <h5 style="font-weight: bold;">Let’s stay connected, sweetie! 💌</h5>
+  <p style="margin-bottom: 10px;">Follow me on:</p>
+  <div style="font-size: 1.5rem;">
+    <a href="#" style="color: #d46a92; margin: 0 10px;"><i class="fab fa-instagram"></i></a>
+    <a href="#" style="color: #d46a92; margin: 0 10px;"><i class="fab fa-facebook"></i></a>
+    <a href="#" style="color: #d46a92; margin: 0 10px;"><i class="fab fa-twitter"></i></a>
+  </div>
+  <hr style="border-top: 1px dashed #d46a92; margin: 20px auto; width: 60%;">
+  <p style="font-size: 0.9rem;">Made with ☁️ and 💗 by Faner, Gill, Montemayor, J.Garcia, Oreiro © 2025</p>
+</footer>
+
+
+</body>
+</html>
